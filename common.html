@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Common的演示</title>
+<style type="text/css">
+.red{background:#f00;}
+.gray{background:#666;}
+#test,button{padding:10px;}
+</style>
+<script type="text/javascript" src="common.js"></script>
+
+<script type="text/javascript">
+var test,redbtn,nonebtn,graybtn,hidebtn,showbtn,list;
+
+function add(){
+	test = Common.$('test');
+	list = Common.$('list');
+	redbtn = Common.byClass('btn1')[0];
+	nonebtn = Common.byClass('btn2')[0];
+	graybtn = Common.byClass('btn3')[0];
+	hidebtn = Common.byClass('btn4')[0];
+	showbtn = Common.byClass('btn5')[0];
+}
+
+function a(){
+	Common.addEvent(redbtn, 'click', function(){
+		Common.removeClass(test, 'gray').addClass(test, 'red');
+	});
+}
+function b(){
+	Common.addEvent(nonebtn, 'click', function(){
+		Common.removeClass(test);
+	});
+}
+function c(){
+	Common.addEvent(graybtn, 'click', function(){
+		Common.removeClass(test, 'red').addClass(test, 'gray');
+	});
+}
+function d(){
+	Common.addEvent(hidebtn, 'click', function(){
+		Common.tog('none', test, list, redbtn, nonebtn, graybtn);
+	});
+	Common.addEvent(hidebtn, 'click', function(){
+		alert('hide!');
+	});
+}
+function e(){
+	Common.addEvent(showbtn, 'click', function(){
+		Common.tog('', test, list, redbtn, nonebtn, graybtn);
+	});
+}
+
+Common.addLoadEvent(add).addLoadEvent(a, b, c, d);
+Common.addLoadEvent(e);
+
+
+</script>
+</head>
+
+<body>
+<h1>Common的演示 通过IE6789 Chrome等测试</h1>
+
+<div id="test" class="">test</div>
+<ul>
+	<li id="list" class="  ">list</li>
+</ul>
+<button class="btn1">red</button>
+<button class="btn2">none</button>
+<button class="btn3">gray</button>
+<button class="btn4">hide</button>
+<button class="btn5">show</button>
+</body>
+</html>
