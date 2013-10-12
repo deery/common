@@ -11,22 +11,34 @@
 	button{
 		font-size: 1em;
 	}
+	textarea{
+		background: #000;
+		color: #fff;
+	}
 	</style>
 </head>
 <body>
 <h1>观察者模式---自定义事件</h1>
 <input type="text" id="input" placeholder="custom arguments here" size="30">
 <p>
-<button id="btn1">add event</button>
-<button id="btn2">trigger event</button>
-<button id="btn3">off event</button>
-<button id="btn4">add once event</button>
-<button id="btn5">trigger once event</button>
+	<button id="btn1">add event 1</button>
+	<button id="btn2">trigger event 1</button>
+	<button id="btn3">off event 1</button>
+	<br>
+	<button id="btn4">add event 2</button>
+	<button id="btn5">trigger event 2</button>
+	<button id="btn6">off event 2</button>
+	<br>
+	<button id="btn7">off all events</button>
+	<br>
+	<button id="btn8">add once event</button>
+	<button id="btn9">trigger once event</button>
 </p>
 <p>
-<textarea rows="10" cols="80" id="text"></textarea>
+	<textarea rows="20" cols="80" id="text" disabled></textarea>
 </p>
-<button id="btn6">reload page</button>
+<button id="btn10">clear console</button>
+<button id="btn11">reload page</button>
 
 <script type="text/javascript" src="events.js"></script>
 <script type="text/javascript">
@@ -39,30 +51,54 @@ var input = $('input')
 var aa = new Events()
 
 $('btn1').onclick = function(){
-	aa.on('some', function(a){
-		text.value += 'event is triggered as : ' + a + '\n'
+	aa.on('event1', function(a){
+		text.value += 'event 1 is triggered as : ' + a + '\n'
 	})
-	console.log(aa.list.some)
+	console.log(aa.list.event1)
 }
 
 $('btn2').onclick = function(){
-	aa.trigger('some', input.value || '')
+	aa.trigger('event1', input.value || '')
 }
 
 $('btn3').onclick = function(){
-	aa.off('some')
+	aa.off('event1')
 }
 
 $('btn4').onclick = function(){
-	aa.once('any', function(g){
-		text.value += 'once is triggered  as : ' + g + '\n'
+	aa.on('event2', function(a){
+		text.value += 'event 2 is triggered as : ' + a + '\n'
 	})
+	console.log(aa.list.event2)
 }
+
 $('btn5').onclick = function(){
-	aa.trigger('any', input.value || '')
+	aa.trigger('event2', input.value || '')
 }
 
 $('btn6').onclick = function(){
+	aa.off('event2')
+}
+
+$('btn7').onclick = function(){
+	aa.off()
+}
+
+$('btn8').onclick = function(){
+	aa.once('once', function(a){
+		text.value += 'event once is triggered as : ' + a + '\n'
+	})
+}
+
+$('btn9').onclick = function(){
+	aa.trigger('once', input.value || '')
+}
+
+$('btn10').onclick = function(){
+	text.value = null
+}
+
+$('btn11').onclick = function(){
 	location.reload()
 }
 </script>
