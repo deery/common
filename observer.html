@@ -82,12 +82,11 @@ off方法也接受两个参数type和handler，但它的不同之处在于，当
 <script type="text/template">
 ev.prototype.off = function(type, handler) {
 	var list = this.list[type] // 缓存此type类型的数组
-	if(!list) return this // 没有此type的数据，玩我呢！
 	if(!type){ // 第一个参数都没提供
 		this.list = {} // 直接清空list
 	} else if(!handler) { // 有type，没handler
 		delete this.list[type] // 这个type的handler全清空
-	} else { // 有type，也有handler
+	} else if(list.length) { // 有type，也有handler
 		for(var i = 0, len = list.length; i < len; i ++){
 			if(list[i] === handler){ // 地毯式扫荡handler
 				list.splice(i, 1) // 犀利的劈掉handler
@@ -144,12 +143,11 @@ var Events = function() {
 		},
 		off : function(type, handler) {
 			var list = this.list[type] // 缓存此type类型的数组
-			if(!list) return this // 没有此type的数据，玩我呢！
 			if(!type){ // 第一个参数都没提供
 				this.list = {} // 直接清空list
 			} else if(!handler) { // 有type，没handler
 				delete this.list[type] // 这个type的handler全清空
-			} else { // 有type，也有handler
+			} else if(list.length) { // 有type，也有handler
 				for(var i = 0, len = list.length; i < len; i ++){
 					if(list[i] === handler){ // 地毯式扫荡handler
 						list.splice(i, 1) // 犀利的劈掉handler
