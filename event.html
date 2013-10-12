@@ -1,0 +1,71 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Custom Events</title>
+	<style type="text/css">
+	body{
+		padding: 100px;
+	}
+	button{
+		font-size: 1em;
+	}
+	</style>
+</head>
+<body>
+<h1>观察者模式---自定义事件</h1>
+<input type="text" id="input" placeholder="custom arguments here" size="30">
+<p>
+<button id="btn1">add event</button>
+<button id="btn2">trigger event</button>
+<button id="btn3">off event</button>
+<button id="btn4">add once event</button>
+<button id="btn5">trigger once event</button>
+</p>
+<p>
+<textarea rows="10" cols="80" id="text"></textarea>
+</p>
+<button id="btn6">reload page</button>
+
+<script type="text/javascript" src="events.js"></script>
+<script type="text/javascript">
+var $ = function(id){
+	return document.getElementById(id)
+}
+var text = $('text')
+var input = $('input')
+
+var aa = new Events()
+
+$('btn1').onclick = function(){
+	aa.on('some', function(a){
+		text.value += 'event is triggered as : ' + a + '\n'
+	})
+	console.log(aa.list.some)
+}
+
+$('btn2').onclick = function(){
+	aa.trigger('some', input.value || '')
+}
+
+$('btn3').onclick = function(){
+	aa.off('some')
+}
+
+$('btn4').onclick = function(){
+	aa.once('any', function(g){
+		text.value += 'once is triggered  as : ' + g + '\n'
+	})
+}
+$('btn5').onclick = function(){
+	aa.trigger('any', input.value || '')
+}
+
+$('btn6').onclick = function(){
+	location.reload()
+}
+</script>
+
+</body>
+</html>
