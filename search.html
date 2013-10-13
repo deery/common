@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+给定一个数组:['abc','deksa','fwdksw','skradkfa', ...]
+求数组里出现次数最多的字。
+<script type="text/javascript">
+Array.prototype.search = function (){
+  var obj = {}
+  for(var i = 0, len = this.length; i < len; i ++){
+    var str = this[i]
+  	for(var j = 0, leng = str.length; j < leng; j ++){
+      if(str[j] in obj){
+        obj[str[j]] ++
+      } else {
+        obj[str[j]] = 1
+      }
+  	}
+  }
+  var num = 0
+  var ret
+  for(var key in obj){
+    if(obj[key] > num){
+      num = obj[key]
+      ret = key
+    }
+  }
+  return {
+    'obj' : obj,
+    'word: ' : ret,
+    'num: ' : num
+  }
+}
+
+var arr = ['aaa','bbbb','cccaa','dakerjg','aerivja','frejsdiru','fjaerig','aeigkfdhr','fasdjhrivg','eukafgt','afje5igh']
+console.log(arr.search())
+</script>
+
+
+<script type="text/javascript">
+Array.prototype.duplicate = function(){
+  return this.concat(this)
+}
+</script>
+</body>
+</html>
