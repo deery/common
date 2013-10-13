@@ -7,8 +7,8 @@
 <body>
 观察者模式--自定义事件详解
 
-自定义事件相当灵活，用途相当广，在攻城湿界备受恩宠。今天大苹果尝试着实现了一个简易的自定义事件模型，测试地址见：
-http://htmlhub.doorder.com/common/events.html
+自定义事件相当灵活，用途相当广，在攻城湿界备受恩宠。今天大苹果尝试着实现了一个简易的自定义事件模型，测试地址请围观：
+http://htmlhub.doorder.com/events/events.html
 代码结构相当简单，思路也相当清晰，就缺拍砖的了。
 
 我们的自定义事件对象有个高端大气上档次的名字：Events！
@@ -18,25 +18,25 @@ Events应该提供一个内部列表(list)来保存被绑定的各种事件类�
 现实是：对于同一种type，有可能会被绑定多个hanlder，因此，每种type对应的是一个由其绑定的1个或多个handler组成的数组。
 
 Events内部的list的数据结构是如下格式：
-<script type="text/template">
+```javascript
 list = {
 	'type1' : [handler1],
 	'type2' : [handler2, handler3]
 	'type3' : [handler4, handler5, handler6 ...],
 	...
 }
-</script>
+```
 
 简单的自定义事件模型应包括绑定，解绑和触发三个基本功能。根据以上事实，可以分别将以上三种功能分别称为 on、off、trigger。
 
 首先定义一个叫ev的类，并初始化它的list对象。
-<script type="text/template">
+```javascript
 function ev(){
 	this.list = {} // 初始化list
 }
-</script>
+```
 在它的原型prototype上设置以上三个方法。即：
-<script type="text/template">
+```javascript
 ev.prototype = {
 	on : function(){
 	},
@@ -47,10 +47,10 @@ ev.prototype = {
 	once : function(){
 	}
 }
-</script>
+```
 注意到我还加上了once方法，它的功能是绑定一次性事件，当触发一次之后马上解绑该事件，由于它有着“阅后即焚”的隐私保护功能，在攻城湿界也有着巨大的市场份额。
 在最外面用一个立即执行函数来包裹以上代码，最后返回这个ev类，交给外面早已支好锅等着的Events：
-<script type="text/template">
+```javascript
 var Events = function(){
 	function ev(){
 		// ...
@@ -60,26 +60,26 @@ var Events = function(){
 	}
 	return ev
 }()
-</script>
+```
 此时的Events是全局对象，如果不产生全局对象，可以挂在jQuery对象下：
-<script type="text/template">
+```javascript
 $.Events = function(){
 	//...
 }()
-</script>
+```
 大结构很清晰了，下面依次实现功能吧。
 on方法：
 on方法要接受两个参数，一个是type，另一个是handler，如果是首次绑定该type，需要初始化这个type的数组(见上面的数据结构)，于是on方法可以这么实现：
-<script type="text/template">
+```javascript
 ev.prototype.on = function(type, handler) {
 	this.list[type] = this.list[type] || [] // 确保是货真价实的数组
 	this.list[type].push(handler) // 因为数组，所以装货
 	return this // 返回自身，准备好菊花
 }
-</script>
+```
 off方法：
 off方法也接受两个参数type和handler，但它的不同之处在于，当两个参数都传递的时候，表示要解绑掉某个type下的某个handler；当只传递一个type的时候，表示要解绑掉某个type下的所有handler；而当不传递参数时，表示要解绑所有type的所有handler。因此首先要判断参数个数：
-<script type="text/template">
+```javascript
 ev.prototype.off = function(type, handler) {
 	var list = this.list[type] // 缓存此type类型的数组
 	if(!type){ // 第一个参数都没提供
@@ -96,10 +96,10 @@ ev.prototype.off = function(type, handler) {
 	}
 	return this // 照样菊花灿烂
 }
-</script>
+```
 trigger方法：
 trigger方法要只需提供要触发的事件即可，简单起见，将函数执行context上下文一律设置为window。此外，还需要转发自定义事件的任意参数。
-<script type="text/template">
+```javascript
 ev.prototype.trigger = function (type){
 	var list = this.list[type] || [] // 如果不存在此type的话，就用空数组来充个数。
 	var args = list.slice.call(arguments, 1) // 借用slice方法劈去type，剩下的都是人家自定义事件的
@@ -110,16 +110,16 @@ ev.prototype.trigger = function (type){
 	}
 	return this // 菊花灿烂
 }
-</script>
+```
 once方法：
 once方法好难产，参考了jQuery的one方法，根本看不懂！根据原理是，绑定事件后，一旦触发此事件，就马上解绑！那怎么实现这样的功能呢？像下面这样，岂不是自欺欺人？
-<script type="text/template">
+```javascript
 ev.prototype.once = function (type, handler) {
 	this.on(type, handler).off(type, handler) // 绑定+解绑
 }
-</script>
+```
 这样根本就不能触发了，还没触发该事件，就已经被暗杀了。经过搜索研究，发现可以处理下要传给on方法的handler。
-<script type="text/template">
+```javascript
 ev.prototype.once = function (type, handler) {
 	var that = this // 缓存this对象
 	var one = function(){ // one里调用handler
@@ -128,9 +128,9 @@ ev.prototype.once = function (type, handler) {
 	}
 	return this.on(type, one) // 绑定该事件，还照样能提供菊花
 }
-</script>
+```
 于是，全部代码就形成了。
-<script type="text/javascript">
+```javascript
 var Events = function() {
 	function ev(){
 		this.list = {} // 初始化list
@@ -178,10 +178,10 @@ var Events = function() {
 	}
 	return ev
 }()
-</script>
+```
 用法：
 直接实例化一个Events：
-<script type="text/javascript">
+```javascript
 var aaa = new Events
 aaa.on('someEvent', function(){
 	console.log('custom event triggered.');
@@ -201,9 +201,9 @@ bbb.once('onceEvent', function(num){
 })
 bbb.trigger('onceEvent', 1) // this event will only trigger once: 1
 bbb.trigger('onceEvent', 2) // 不再执行！
-</script>
+```
 在解绑off时，我们这么写：
-<script type="text/javascript">
+```javascript
 var ccc = new Events
 ccc.on('someEvent', function(){
 	console.log('someEvent occured！')
@@ -212,10 +212,10 @@ ccc.off('someEvent', function(){
 	console.log('someEvent occured！')
 })
 ccc.trigger('someEvent') // someEvent occured！
-</script>
+```
 WTF! 说好的解绑呢？还是解绑根本就是闹着玩的？
 这里涉及到了引用对象比较问题。引用对象里，两个内容完全相同的函数也不会完全相等(list[i] === handler)。所以，当绑定事件时，如果此事件以后会涉及到解绑，则在开始就需要将其函数名传递给on跟off，而不是两个内容相同的函数字面量，因为函数字面量之间不可能相等。
-<script type="text/javascript">
+```javascript
 var ddd = new Events
 var handler = function(num){
 	console.log('someEvent occured！' + num)
@@ -224,6 +224,6 @@ ddd.on('someEvent', handler)
 ddd.trigger('someEvent', 1) // someEvent occured！1
 ddd.off('someEvent', handler)
 ddd.trigger('someEvent', 2) // 不再执行！
-</script>
+```
 </body>
 </html>
