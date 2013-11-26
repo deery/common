@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WebQQ</title>
+  <style type="text/css">
+  #div1{
+    width: 200px;height: 200px;background: red;position: absolute;display: none;
+  }
+  #div2{
+    width: 20px;height: 30px;background: yellow;position: absolute;right: 0;bottom: 0;cursor: pointer;
+  }
+  #div3{
+    width: 100px;height: 100px;background: red; position: absolute;right: 0;top: 0;cursor: pointer;
+  }
+  </style>
+</head>
+<body>
+  <input type="button" value="click" id="input1">
+  <div id="div1">
+    <div id="div2"></div>
+  </div>
+  <div id="div3"></div>
+  <script type="text/javascript" src="js/sea.js"></script>
+  <script type="text/javascript">
+  // A develop
+  seajs.use('./js/main.js', function(ex){
+
+  })
+  </script>
+</body>
+</html>

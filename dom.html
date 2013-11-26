@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <style type="text/css">
+  body{
+    font: 1.5em "Microsoft Yahei";
+  }
+  </style>
+</head>
+<body>
+<h1>DOM 优化</h1>
+<ol>
+  <li>Dom与javascript</li>
+  <li>操作DOM</li>
+  <li>innerHTML 与 DOM操作对比</li>
+  <li>减少DOM操作
+    <ol>
+      <li>节点克隆</li>
+      <li>访问元素集合 尽量用局部变量</li>
+      <li>元素节点 尽量用只获取元素的节点方法</li>
+        <ol>
+          <li>childNodes => children</li>
+          <li>firstChild => firstElementChild</li>
+        </ol>
+      <li>选择器API querySelector等</li>
+    </ol>
+  </li>
+  <li>DOM与浏览器
+    <ol>
+      <li>重排：改变页面的内容</li>
+      <li>重绘：浏览器显示内容</li>
+      <li>添加顺序：尽量在appedChild前添加操作</li>
+      <li>合并DOM操作：利用cssText</li>
+      <li>缓存布局信息：操作局部变量</li>
+      <li>文档碎片：document.createFragmentElement</li>
+    </ol>
+  </li>
+</ol>
+
+
+<p id="para">闭包在IE下会引发内存泄漏！</p>
+<script type="text/javascript">
+  var p = document.getElementById('para')
+  var id = p.id
+  p.onclick = function(){
+    alert(id)
+  }
+  p = null
+
+</script>
+</body>
+</html>
