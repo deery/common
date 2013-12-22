@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ajax</title>
+  <style type="text/css">
+  div{
+    width: 400px;
+    height: 400px;
+    background: #fcc;
+    overflow: auto;
+  }
+  </style>
+</head>
+<body>
+
+  <div id="slide">click next to start the show.</div>
+  <a href="javascript:;" onclick="prev()">prev</a>
+  <a href="javascript:;" onclick="next()">next</a>
+  <a href="javascript:;" onclick="loadjson()">loadjson</a>
+  <script type="text/javascript">
+  var slide = document.getElementById('slide')
+
+  var slideNum = 0
+
+  function prev(){
+    if(slideNum === 1){
+      slideNum = 4
+    } else {
+      slideNum --
+    }
+
+    getAjax()
+  }
+
+  function next(){
+    if(slideNum === 4){
+      slideNum = 1
+    } else {
+      slideNum ++
+    }
+
+    getAjax()
+  }
+
+  function getAjax(){
+    var xhr = new XMLHttpRequest()
+
+    xhr.open('get', 'slider' + slideNum + '.html', true)
+
+    xhr.onreadystatechange = function(){
+      if(xhr.status === 200 && xhr.readyState === 4){
+        slide.innerHTML = xhr.responseText
+      }
+    }
+
+    xhr.send(null)
+  }
+
+  function loadjson(){
+    var script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.src = 'http://localhost:5000/somejson.js'
+    document.body.appendChild(script)
+  }
+  var handler = function(data){
+    console.log(data)
+  }
+  </script>
+
+</body>
+</html>
