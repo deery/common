@@ -18,6 +18,7 @@
   <a href="javascript:;" onclick="prev()">prev</a>
   <a href="javascript:;" onclick="next()">next</a>
   <a href="javascript:;" onclick="loadjson()">loadjson</a>
+  <a href="javascript:;" onclick="loadGoods()">loadGoods</a>
   <script type="text/javascript">
   var slide = document.getElementById('slide')
 
@@ -66,6 +67,21 @@
   var handler = function(data){
     console.log(data)
   }
+  </script>
+
+  <script type="text/javascript">
+  function loadGoods (){
+    var script = document.createElement('script')
+    script.type = 'text/javascript'
+    script.src = 'http://phoneicolor.networking.io/uniqlo/index.php/Index/getgood?callback=backs'
+    document.body.appendChild(script)
+  }
+
+  function backs(data){
+    slide.innerHTML = data.ustr
+  }
+
+//  http://phoneicolor.networking.io/uniqlo/index.php/Index/getgood?callback=jsonpCallback3&tem=6&cid=3_9&sid=undefined&tid=0
   </script>
 
 </body>
