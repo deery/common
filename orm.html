@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ORM</title>
+</head>
+<body>
+  
+<script type="text/javascript">
+var Model = {
+  inherited : function(){},
+  created: function(){},
+
+  prototype: {},
+
+  create: function(){
+    var object = Object.create(this)
+    object.parent = this
+    object.prototype = object.fn = Object.create(this.prototype)
+
+    object.created()
+    this.inherited(object)
+
+    return object
+  },
+
+  init: function(){
+    var instance = Object.create(this.prototype)
+    instance.parent = this
+    instance.init.apply(instance, arguments)
+
+    return instance
+  },
+
+  extend: function(o){
+    var extended = o.extended
+    for(var key in o){
+      this[key] = o[key]
+    }
+    if(extended) extended(this)
+  },
+  include: function(o){
+    var included = o.included
+    for(var key in o){
+      this.prototype[key] = o[key]
+    }
+    if(included) included(this)
+  }
+}
+
+Model.extend({
+  find: function(){}
+})
+
+Model.include({
+  init: function(a){console.log(a)},
+  load : function(attributes){}
+})
+
+var Asset = Model.create()
+
+var asset = Asset.init({name: 'foo.png'})
+
+
+</script>
+</body>
+</html>

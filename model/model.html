@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<script type="text/javascript" src="../../backbone/js/jquery.js"></script>
+<script type="text/javascript" src="js/jquery.tmpl.js"></script>
+<script type="text/javascript">
+var User = function(name){
+  this.name = name
+}
+
+User.records = []
+
+User.bind = function(ev, callback){
+  // var calls = this._callbacks || (this._callbacks = {})
+  this._callbacks = this._callbacks || {}
+  this._callbacks[ev] = this._callbacks[ev] || []
+
+  this._callbacks[ev].push(callback)
+  
+}
+
+User.trigger = function(ev){
+  var calls, lists
+  if(!(calls = this._callbacks)) return this
+  if(!(lists = this._callbacks[ev])) return this
+  jQuery.each(lists, function(){ this() })
+}
+
+User.create = function(name){
+  this.records.push( new this(name) )
+  User.trigger('changes')
+}
+
+jQuery(function($){
+  User.bind('changes', function(){
+    var template = $.template($('#temp').html(),User.records[0])
+    $('div').empty().append(template)
+  })
+})
+
+</script>
+
+<script id="temp" type="text/template">
+  <li>${name}</li>
+</script>
+<div></div>
+</body>
+</html>
