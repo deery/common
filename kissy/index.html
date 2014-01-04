@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+<!-- 
+
+http://www.tmall.com/go/act/test/test-afdsaf.php?spm=0.0.0.0.6vncTL 
+
+ -->
+
+<script src="http://g.tbcdn.cn/??kissy/k/1.3.0/kissy-min.js"></script>
+
+<input type="file" class="g-u" id="J_UploaderBtn" value="上传文件" name="img" >
+
+<div id="img"></div>
+<script>
+// document.domain = 'tmall.com';
+KISSY.use('gallery/uploader/1.5/index,gallery/uploader/1.5/themes/default/index,gallery/uploader/1.5/plugins/auth/auth,gallery/uploader/1.5/themes/default/style.css', function (S, Uploader, Auth) {
+    //上传组件插件
+  var uploader = new Uploader('#J_UploaderBtn', {
+    type: 'iframe',
+    name: 'img',
+    data: {
+      'encode': false,
+      'iframe': true
+    },
+    action: 'http://api.mallbrand.tmall.com/service/imgUpload.do',
+    multiple: false
+  });
+
+  //验证插件
+  uploader.plug(new Auth({
+    //最多上传个数
+    max:3
+  }));
+
+  uploader.on('error', function(ev) {
+    alert(ev.msg);
+  });
+  uploader.on('success', function(ev) {
+    S.DOM.html('#img', '<img src="' + ev.result.data.pic + '" />');
+  });
+})
+</script>
+</body>
+</html>

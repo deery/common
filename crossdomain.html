@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Document</title>
+</head>
+<body>
+<script type="text/javascript">
+//script.src = 'http://php.weather.sina.com.cn/iframe/index/w_cl.php?code=js&day=0&city=北京?callback=back'
+;(function(){
+function jsonpCallback(da){
+  console.log(da)
+}
+
+var avg = 2
+var pron = '北京'
+
+var JSONP = document.createElement("script");
+JSONP.type = "text/javascript";
+JSONP.src = "http://phoneicolor.networking.io/uniqlo/index.php/Index/ajaxgood?callback=jsonpCallback&tem=" + avg + "&pro=" + pron;
+
+document.getElementsByTagName("head")[0].appendChild(JSONP);
+}());
+</script>
+</body>
+</html>
