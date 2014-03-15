@@ -8,6 +8,9 @@
     padding: 50px;
     font: 2em "Microsoft Yahei";
   }
+  .red{
+    color: #f00;
+  }
   
   </style>
   <script type="text/javascript" src="../backbone/js/jquery.js"></script>
@@ -15,20 +18,104 @@
 <body>
 <a href="#gotop">archors</a>
 
-<script type="text/javascript">
-var votes = $('a')
 
-function clickVotes(){
-  votes.trigger('clicked')
+<p id="p">hello this is <i id="i">luck</i> from iptonic!</p>
+<script type="text/javascript">
+//1
+/*
+var p = $('#p')[0]
+var i = $('#i')[0]
+var span = document.createElement('span')
+var txt = document.createTextNode(' as a web developer')
+span.appendChild(txt)
+span.className = 'red'
+
+p.insertBefore(span, i.nextSibling)
+
+// var votes = $('a')
+
+// function clickVotes(){
+//   votes.trigger('clicked')
+// }
+
+// votes.on('click',clickVotes).on('clicked', function(){
+//   var that = this
+//   this.href = 'javascript:;'
+//   setTimeout(function(){
+//     that.href = '#gotop'
+//   }, 5000)
+// })
+
+//2
+function Person(name, age){
+  this.name = name
+  this.age = age
+  this.getName = function(){
+    return this.name
+  }
 }
 
-votes.on('click',clickVotes).on('clicked', function(){
-  var that = this
-  this.href = 'javascript:;'
-  setTimeout(function(){
-    that.href = '#gotop'
-  }, 5000)
-})
+Person.prototype = {
+  constructor:Person,
+  getAge: function(){
+    return this.age
+  }
+}
+
+var person = new Person('luck', 12)
+
+console.log(person instanceof Person)
+console.log(person.constructor)
+console.log(person.hasOwnProperty('name'))
+console.log(person.hasOwnProperty('age'))
+console.log(person.hasOwnProperty('getName'))
+console.log(person.hasOwnProperty('getAge'))
+
+
+//3
+
+var a = 6
+
+setTimeout(function(){
+  console.log(a) // 66
+  a = 666
+},1000)
+
+a = 66
+
+setTimeout(function(){
+  console.log(a) // 666
+}, 3000)
+
+
+
+//4
+var a = 0;
+
+(function(){
+  console.log(a)
+  var a = 2
+})()
+
+
+*/
+
+//5
+var i = 0;
+
+try{
+  var i = 1;
+  throw new Error('error message!')
+} catch(err){
+  var i = 2;
+  console.log(err.message)
+}
+
+console.log(i) //2
+console.log(window.i) //2
+console.log(err) // error!
+console.log(err.message) // error!
+
 </script>
 </body>
 </html>
