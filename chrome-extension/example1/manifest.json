@@ -1,0 +1,17 @@
+{
+    "name": "Background",
+    "description": "Change the current page backgroundColor",
+    "version": "1.0",
+    "permissions": [
+      "activeTab"
+    ],
+    "background":{
+      "scripts": ["background.js"]
+    },
+    "browser_action": {
+      "default_icon": "icon.png",
+      "default_title": "页面背景切换",
+      "default_popup": "popup.html"
+    },
+    "manifest_version": 2
+}

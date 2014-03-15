@@ -1,0 +1,16 @@
+{
+    "name": "contentScripts",
+    "description": "Change the current page backgroundColor",
+    "version": "1.0",
+
+    "content_scripts":[{
+    	"matches":["http://www.google.com.hk/"],
+    	"js": ["content_scripts.js"]
+    }],
+
+    "permissions":[
+    	"tabs", "http://www.google.com.hk/"
+    ],
+    
+	   "manifest_version": 2
+}
