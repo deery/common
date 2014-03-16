@@ -1,16 +1,19 @@
 {
-    "name": "contentScripts",
-    "description": "Change the current page backgroundColor",
-    "version": "1.0",
+  "name": "contentScripts",
+  "description": "Change the current page backgroundColor",
+  "version": "1.0",
 
-    "content_scripts":[{
-    	"matches":["http://www.google.com.hk/"],
-    	"js": ["content_scripts.js"]
-    }],
+  "browser_action": {
+    // "default_icon": "icon.png",
+    "default_popup": "popup.html",
+    "default_title": "Test plugin"
+  },
 
-    "permissions":[
-    	"tabs", "http://www.google.com.hk/"
-    ],
-    
-	   "manifest_version": 2
+  "background":{
+    // "scripts": ["content_scripts.js"],
+    "page": "background.html"
+  },
+
+
+  "manifest_version": 2
 }
