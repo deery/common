@@ -1,0 +1,17 @@
+{
+
+  "name": "my Counter",
+  "version": "1.0",
+  "description": "my counter for learning purpose",
+
+  "browser_action": {
+    "default_icon": "16.png",
+    "default_popup": "popup.html",
+    "default_title": "MyCounter"
+  },
+
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "manifest_version": 2
+}
