@@ -1,18 +1,41 @@
-module.exports = function (grunt) {
+module.exports = function(grunt){
+
+  require('matchdep').filterDev('grunt-*').forEach(grunt.loadNpmTasks)
+
   grunt.initConfig({
-    pk: grunt.file.readJSON('package.json'),
-    sass: {
-      build: {
-        options:{
-          style: 'compressed'
-        },
+    pkg: grunt.file.readJSON('package.json'),
+
+    coffee: {
+      compile: {
         files: {
-          'build/css/master.css': 'assets/sass/master.scss'
+          'build/js/main.js': 'assets/coffee/main.coffee'
         }
+      }
+    },
+
+    jade: {
+      options: {
+        pretty: true
+      },
+      compile: {
+        files: {
+          'build/index.html': 'assets/jade/index.jade'
+        }
+      }
+    },
+
+    watch: {
+      js: {
+        files: ['assets/coffee/main.coffee'],
+        tasks: ['coffee']
+      },
+      jade: {
+        files: ['assets/jade/index.jade'],
+        tasks: ['jade']
       }
     }
   })
-  grunt.loadNpmTasks('grunt-contrib-sass')
 
   grunt.registerTask('default', [])
+
 }
