@@ -3,6 +3,11 @@ html
   head
     meta(charset="utf-8")
     title Jade Document
-    link(rel="stylesheet", type="text/css", href="/build/css/main.css")
+    link(rel="stylesheet", type="text/css", href="css/main.css")
+    script(src="js/main.js")
   body
-    div abcd
+    h1 Game 2048
+    div#wrapper
+      - for(var x = 1; x <= 16; x ++)
+        div(class='item block' + x)
+      div#container

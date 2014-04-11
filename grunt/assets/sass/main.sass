@@ -1,0 +1,107 @@
+body
+  margin: 0 auto
+  font: 1em "Microsoft Yahei"
+
+$background: #ACA4A4
+$expand: 450px
+$radius: 5px
+$left: 10px
+$top: 10px
+$width: 100px
+
+@mixin border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius:    $radius
+  -o-border-radius:      $radius
+  border-radius:         $radius
+
+@mixin position($left, $top)
+  left: $left
+  top: $top
+
+h1
+  text-align: center
+
+#wrapper
+  background: $background
+  width: $expand
+  height: $expand
+  margin-left: auto
+  margin-right: auto
+  position: relative
+  @extend h1
+  @include border-radius(5px)
+
+#container
+  width: $expand
+  height: $expand
+  position: absolute
+  left: 0
+  top: 0
+
+.item
+  width: $width
+  height: $width
+  position: absolute
+  @include position($left, $top)
+  background: #ddd
+  @include border-radius(5px)
+  font: 
+    size: 50px
+    weight: bold
+  line-height: 100px
+
+.block1
+  @include position($left, $top)
+.block2
+  @include position($left + $width + 10, $top)
+.block3
+  @include position($left + ($width + 10) *2, $top)
+.block4
+  @include position($left + ($width + 10) *3, $top)
+.block5
+  @include position($left, $top + $width + 10)
+.block6
+  @include position($left + $width + 10, $top + $width + 10)
+.block7
+  @include position($left + ($width + 10) *2, $top + $width + 10)
+.block8
+  @include position($left + ($width + 10) *3, $top + $width + 10)
+.block9
+  @include position($left, $top + ($width + 10) *2)
+.block10
+  @include position($left + $width + 10, $top + ($width + 10) *2)
+.block11
+  @include position($left + ($width + 10) *2, $top + ($width + 10) *2)
+.block12
+  @include position($left + ($width + 10) *3, $top + ($width + 10) *2)
+.block13
+  @include position($left, $top + ($width + 10) *3)
+.block14
+  @include position($left + $width + 10, $top + ($width + 10) *3)
+.block15
+  @include position($left + ($width + 10) *2, $top + ($width + 10) *3)
+.block16
+  @include position($left + ($width + 10) *3, $top + ($width + 10) *3)
+
+.level1
+  background: #f7ecec
+  color: #444
+  @extend .item
+.level2
+  background: #ece7c9
+  color: #666
+  @extend .item
+.level3
+  background: #ffa56f
+  color: #fff
+  @extend .item
+.level4
+  @extend .level3
+  background: #fa8037
+.level5
+  @extend .level3
+  background: #ce5e1a
+.level6
+  @extend .level3
+  background: #e34b4b

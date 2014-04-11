@@ -24,6 +24,14 @@ module.exports = function(grunt){
       }
     },
 
+    sass: {
+      build: {
+        files: {
+          'build/css/main.css' : 'assets/sass/main.sass'
+        }
+      }
+    },
+
     watch: {
       js: {
         files: ['assets/coffee/main.coffee'],
@@ -32,6 +40,10 @@ module.exports = function(grunt){
       jade: {
         files: ['assets/jade/index.jade'],
         tasks: ['jade']
+      },
+      css: {
+        files: ['assets/sass/main.sass'],
+        tasks: ['sass']
       }
     }
   })

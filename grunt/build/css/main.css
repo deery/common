@@ -1,0 +1,125 @@
+body {
+  margin: 0 auto;
+  font: 1em "Microsoft Yahei"; }
+
+h1, #wrapper {
+  text-align: center; }
+
+#wrapper {
+  background: #aca4a4;
+  width: 450px;
+  height: 450px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px; }
+
+#container {
+  width: 450px;
+  height: 450px;
+  position: absolute;
+  left: 0;
+  top: 0; }
+
+.item, .level1, .level2, .level3, .level4, .level5, .level6 {
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  background: #dddddd;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+  font-size: 50px;
+  font-weight: bold;
+  line-height: 100px; }
+
+.block1 {
+  left: 10px;
+  top: 10px; }
+
+.block2 {
+  left: 120px;
+  top: 10px; }
+
+.block3 {
+  left: 230px;
+  top: 10px; }
+
+.block4 {
+  left: 340px;
+  top: 10px; }
+
+.block5 {
+  left: 10px;
+  top: 120px; }
+
+.block6 {
+  left: 120px;
+  top: 120px; }
+
+.block7 {
+  left: 230px;
+  top: 120px; }
+
+.block8 {
+  left: 340px;
+  top: 120px; }
+
+.block9 {
+  left: 10px;
+  top: 230px; }
+
+.block10 {
+  left: 120px;
+  top: 230px; }
+
+.block11 {
+  left: 230px;
+  top: 230px; }
+
+.block12 {
+  left: 340px;
+  top: 230px; }
+
+.block13 {
+  left: 10px;
+  top: 340px; }
+
+.block14 {
+  left: 120px;
+  top: 340px; }
+
+.block15 {
+  left: 230px;
+  top: 340px; }
+
+.block16 {
+  left: 340px;
+  top: 340px; }
+
+.level1 {
+  background: #f7ecec;
+  color: #444444; }
+
+.level2 {
+  background: #ece7c9;
+  color: #666666; }
+
+.level3, .level4, .level5, .level6 {
+  background: #ffa56f;
+  color: white; }
+
+.level4 {
+  background: #fa8037; }
+
+.level5 {
+  background: #ce5e1a; }
+
+.level6 {
+  background: #e34b4b; }
