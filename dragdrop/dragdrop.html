@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<style type="text/css">
+body{
+  font: bold 1.5em/150px "Arial";
+  text-align: center;
+  overflow: hidden;
+}
+div{
+  width: 150px;height: 150px;background: #ccc;position: absolute;
+  left: 0;
+  top: 100px;
+  cursor: move;
+}
+</style>
+</head>
+<body>
+<div draggable="true"> draggable </div>
+<div style="left:155px;"> undraggable </div>
+<p id="status"></p>
+<script type="text/javascript" src="dragdrop.js"></script>
+</body>
+</html>
