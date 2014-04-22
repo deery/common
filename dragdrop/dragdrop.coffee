@@ -53,5 +53,6 @@ class Dragdrop extends Event
         if @target
           @.trigger 'dragend', @, event
           @target = null
+    false
 
 @dragdrop = new Dragdrop
