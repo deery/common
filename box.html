@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Box</title>
+<style type="text/css">
+*, article, section{
+  margin: 0;
+  padding: 0;
+}
+div{
+  text-align: center;
+}
+.wrap{
+  width: 600px;
+  height: 108px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: box;
+  margin: 0 auto;
+  -webkit-box-pack: justify;
+  -moz-box-pack: justify;
+  box-pack: justify;
+}
+section{
+  width: 100px;
+}
+.section1{
+  background: orange;
+}
+.section2{
+  background: purple;
+}
+.section3{
+  background: green;
+}
+.section4{
+  background: green;
+}
+</style>
+</head>
+<body>
+  <div>
+<article class="wrap">
+  <section class="section1">01</section>
+  <section class="section2">02</section>
+  <section class="section3">03</section>
+  <section class="section4">03</section>
+</article>
+</div>
+
+
+<script type="text/javascript">
+var sections = document.getElementsByTagName('section')
+sections = Array.prototype.slice.call(sections)
+sections.forEach(function(section){
+  section.innerHTML += '<br />' + section.offsetWidth + 'px : ' + section.offsetHeight + 'px'
+})
+</script>
+</body>
+</html>
