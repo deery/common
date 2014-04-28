@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+	div{
+		width: 100px;
+		height: 100px;
+		background: #ccc;
+	}
+	</style>
+</head>
+<body>
+
+<!-- <input type="file" name="files[]" id="files" multiple>
+<output id="list"></output>
+
+
+<script type="text/javascript">
+if(window.File && window.FileReader && window.FileList && window.Blob){
+
+} else {
+  alert('the file apis are not fully supported in this browser.')
+}
+
+function handleFileSelect(ev){
+  var files = ev.target.files
+  // var output = []
+  files = Array.prototype.slice.call(files)
+  var output = files.map(function(file){
+    console.log(file.name)
+    return '<li><strong>' + escape(file.name) + '</strong>' + (file.type || 'n/a') + ') - ' + file.size + 'bytes, last Modified: ' + file.lastModifiedDate.toLocaleString() + '</li>'
+  })
+
+  document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>'
+
+}
+document.getElementById('files').addEventListener('change', handleFileSelect, false)
+</script> -->
+
+<!-- <div id="drop_zone">Drop files here</div>
+<output id="list"></output>
+
+<script type="text/javascript">
+function handleFileSelect(e){
+  e.stopPropagation()
+  e.preventDefault()
+
+  var files = e.dataTransfer.files
+
+  files = Array.prototype.slice.call(files)
+
+  var output = files.map(function(f){
+    return '<li><strong>'  + escape(f.name) + '</strong> (' + (f.type || 'n/a') + ') - ' + f.size + ' bytes , last modified: ' + f.lastModifiedDate.toLocaleDateString() + '</li>'
+  })
+
+  document.getElementById('list').innerHTML = '<ul>' + output.join('') + '</ul>'
+}
+
+function handleDragOver(e){
+  e.stopPropagation()
+  e.preventDefault()
+
+  e.dataTransfer.dropEffect = 'copy'
+}
+
+var dropZone = document.getElementById('drop_zone')
+dropZone.addEventListener('dragover', handleDragOver, false)
+dropZone.addEventListener('drop', handleFileSelect, false)
+</script> -->
+<input type="file" name="files[]" id="files" multiple>
+<output id="list"></output>
+
+<script type="text/javascript">
+function handleFileSelect(e){
+  var files = e.target.files
+
+  for(var i = 0, f; f = files[i]; i ++){
+    if(!f.type.match('image.*')){
+      continue;
+    }
+
+    var reader = new FileReader();
+
+    reader.onload = function(theFile){
+      return function(e){
+        var span = document.createElement('span')
+        span.innerHTML = ['<img class="thumb" src="' + e.target.result + '" title="' + escape(theFile.name) + '"/>'].join('');
+        
+        document.getElementById('list').insertBefore(span, null);
+      };
+    }(f);
+
+    reader.readAsDataURL(f)
+  }
+}
+
+document.getElementById('files').addEventListener('change', handleFileSelect, false)
+</script>
+
+</body>
+</html>

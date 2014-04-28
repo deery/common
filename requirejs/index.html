@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<script data-main="./js/main" type="text/javascript" src="js/require.js"></script>
+<style type="text/css">
+div{
+  background-color: #f00;
+  width: 100px;
+  height: 100px;
+  position: absolute;
+  top: 0;
+}
+#drag1{
+  left: 0;
+}
+#drag2{
+  right: 0;
+  cursor: move;
+}
+a{
+  background-color: yellow;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  cursor: nw-resize;
+  display: block;
+}
+</style>
+</head>
+<body>
+<div id="drag1">
+  <a href="javascript:;" id="archor"></a>
+</div>
+<div id="drag2"></div>
+</body>
+</html>

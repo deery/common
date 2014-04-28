@@ -10,8 +10,12 @@
       that = this;
       this.div.onmousedown = function(e) {
         e = that.getEvent(e);
+        if (e.which !== 1) {
+          return;
+        }
         that.diffX = e.offsetX;
         that.diffY = e.offsetY;
+        console.log(e.which);
         document.onmousemove = function(e) {
           e = that.getEvent(e);
           that.div.style.left = e.clientX - that.diffX + 'px';
